@@ -1,8 +1,29 @@
 import { useState } from 'react';
 import { AiFillEye, AiFillGithub, AiFillGoogleCircle, AiOutlineEye, AiOutlineMail } from 'react-icons/ai'
 import { RiLockPasswordLine } from 'react-icons/ri'
+import useAuth from '../../Hooks/useAuth';
 const Login = () => {
     const [passType, setPassType] = useState("password")
+    const [error, setError] = useState(null)
+
+    const {login} = useAuth()
+    console.log(login)
+
+    const handleLogin = ()=>{
+        const email = form.email.value
+        const password = form.password.value
+
+        console.log(email, password)
+
+        login(email,password)
+        .then(res=> {
+            console.log(res.user)
+        })
+        .catch(error=>{
+            console.log(error.code)
+            setError(error.code)
+        })
+    }
 
     return (
         <div className='h-[90vh] flex justify-center items-center'>
@@ -24,7 +45,7 @@ const Login = () => {
                     <div className='w-24 lg:w-48 md:w-48 h-[1px]  bg-[#010101]'></div>
                 </div>
                 <div className=' w-full'>
-                    <form>
+                    <form onClick={handleLogin}>
                         <div className='flex flex-col gap-6'>
                             <div className='flex justify-center items-center gap-2'>
                                 <div className='flex-0'>
@@ -48,7 +69,13 @@ const Login = () => {
                                     }
                                 </div>
                             </div>
-                            <input type="submit" value="Login" className='input input-bordered rounded w-full text-[#F4F9FD] bg-[#2BAFFC] hover:bg-transparent hover:border-[#2BAFFC] hover:text-[#010101] cursor-pointer font-bold' />
+                            <div>
+                                {error && <small className='text-red-500 font-bold'>{error}</small>}
+                            </div>
+                            <div>
+                                <input type="submit" value="Login" className='input input-bordered rounded w-full text-[#F4F9FD] bg-[#2BAFFC] hover:bg-transparent hover:border-[#2BAFFC] hover:text-[#010101] cursor-pointer font-bold' />
+                            </div>
+                            
                         </div>
                     </form>
                 </div>
