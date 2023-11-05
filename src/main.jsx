@@ -7,10 +7,11 @@ import AuthProvider from './Provider/AuthProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
-      <div className='lora'>
+    <div className='lora'>
+      <AuthProvider>
         <RouterProvider router={Routes} />
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+    </div>
+
   </React.StrictMode>,
 )

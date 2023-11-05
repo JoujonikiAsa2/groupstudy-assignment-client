@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import auth from "../../Firebase/firebase.config";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { redirect } from "react-router-dom";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
@@ -12,16 +13,6 @@ const AuthProvider = ({children}) => {
         setIsLoading(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
-
-    useEffect(()=>{
-        const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-            setUser(currentUser)
-            console.log("Current user is: ",currentUser)
-        })
-        return ()=>{
-            return unsubscribe()
-        }
-    })
 
     const login=(email, password)=>{
         setIsLoading(true)
@@ -36,13 +27,22 @@ const AuthProvider = ({children}) => {
     const gitHubLogin=()=>{
         setIsLoading(true)
         const gitHubLoginProvider = new GithubAuthProvider()
-        return createUser(auth, gitHubLoginProvider)
+        return signInWithPopup(auth, gitHubLoginProvider)
     }
 
     const signOut=()=>{
-        setIsLoading(true)
         return signOut(auth)
     }
+
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
+            setUser(currentUser)
+            console.log("Current user is: ",currentUser)
+        })
+        return ()=>{
+            return unsubscribe()
+        }
+    })
 
     const value = {
         createUser,

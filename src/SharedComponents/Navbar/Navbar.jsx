@@ -1,6 +1,18 @@
+import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import auth from "../../../Firebase/firebase.config";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+
+    const { user, logOut } = useContext(AuthContext)
+    console.log(user)
+    const handleLogOut = () => {
+        signOut(auth)
+            .then(() => { console.log("Successfull") })
+            .catch((error) => { console.log(error) })
+    }
 
     const links = <>
         <li><NavLink to="/" className="bg-transparent" style={({ isActive }) => {
@@ -19,22 +31,6 @@ const Navbar = () => {
                 fontWeight: isActive ? "bold" : "medium",
             }
         }}>Assignments</NavLink></li>
-        <li><NavLink to="/login" className="bg-transparent" style={({ isActive }) => {
-            return {
-                backgroundColor: isActive ? "#55c360" : "",
-                color: isActive ? "white" : "#010101",
-                fontSize: '1rem',
-                fontWeight: isActive ? "bold" : "medium",
-            }
-        }}>Login</NavLink></li>
-        <li><NavLink to="/register" className="bg-transparent" style={({ isActive }) => {
-            return {
-                backgroundColor: isActive ? "#55c360" : "",
-                color: isActive ? "white" : "#010101",
-                fontSize: '1rem',
-                fontWeight: isActive ? "bold" : "medium",
-            }
-        }}>Register</NavLink></li>
     </>
     return (
         <div className="drawer">
@@ -51,6 +47,64 @@ const Navbar = () => {
                     <div className="flex-none hidden lg:block">
                         <ul className="menu menu-horizontal">
                             {links}
+                            {
+                                user
+                                    ?
+                                    <div className="flex">
+
+                                        <li><NavLink to="/createAssignment" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>Create Assignment</NavLink></li>
+                                        <li><NavLink to="/myAssignments" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>My Assignment</NavLink></li>
+                                        <li><NavLink to="/submittedAssignments" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>Submitted Assignments</NavLink></li>
+                                        <li><NavLink to="/" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: "transparent",
+                                                fontSize: '1rem',
+                                                color: "#010101",
+                                                fontWeight: "medium",
+                                            }
+                                        }} onClick={handleLogOut}>LogOut</NavLink></li>
+                                    </div>
+                                    :
+                                    <div className="flex">
+                                        <li><NavLink to="/login" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>Login</NavLink></li>
+                                        <li><NavLink to="/register" className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>Register</NavLink></li>
+                                    </div>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -62,6 +116,64 @@ const Navbar = () => {
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200">
                     {links}
+                    {
+                        user
+                            ?
+                            <div className="flex flex-col">
+
+                                <li><NavLink to="/createAssignment" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? "#55c360" : "",
+                                        color: isActive ? "white" : "#010101",
+                                        fontSize: '1rem',
+                                        fontWeight: isActive ? "bold" : "medium",
+                                    }
+                                }}>Create Assignment</NavLink></li>
+                                <li><NavLink to="/myAssignments" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? "#55c360" : "",
+                                        color: isActive ? "white" : "#010101",
+                                        fontSize: '1rem',
+                                        fontWeight: isActive ? "bold" : "medium",
+                                    }
+                                }}>My Assignment</NavLink></li>
+                                <li><NavLink to="/submittedAssignments" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? "#55c360" : "",
+                                        color: isActive ? "white" : "#010101",
+                                        fontSize: '1rem',
+                                        fontWeight: isActive ? "bold" : "medium",
+                                    }
+                                }}>Submitted Assignments</NavLink></li>
+                                <li><NavLink to="/" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: "transparent",
+                                        fontSize: '1rem',
+                                        color: "#010101",
+                                        fontWeight: "medium",
+                                    }
+                                }} onClick={handleLogOut}>LogOut</NavLink></li>
+                            </div>
+                            :
+                            <div>
+                                <li><NavLink to="/login" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? "#55c360" : "",
+                                        color: isActive ? "white" : "#010101",
+                                        fontSize: '1rem',
+                                        fontWeight: isActive ? "bold" : "medium",
+                                    }
+                                }}>Login</NavLink></li>
+                                <li><NavLink to="/register" className="bg-transparent" style={({ isActive }) => {
+                                    return {
+                                        backgroundColor: isActive ? "#55c360" : "",
+                                        color: isActive ? "white" : "#010101",
+                                        fontSize: '1rem',
+                                        fontWeight: isActive ? "bold" : "medium",
+                                    }
+                                }}>Register</NavLink></li>
+                            </div>
+                    }
                 </ul>
             </div>
         </div>
