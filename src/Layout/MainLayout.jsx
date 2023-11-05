@@ -2,7 +2,7 @@ import Navbar from "../SharedComponents/Navbar/Navbar";
 
 const MainLayout = () => {
     return (
-        <div className="lora">
+        <div className="">
             <Navbar></Navbar>
         </div>
     );

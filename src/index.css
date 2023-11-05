@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.lora{
+.lora {
   font-family: 'Lora', serif;
 }
+
+/* 
+#010101
+#F4F9FD
+#2BAFFC
+#55C360
+ */
