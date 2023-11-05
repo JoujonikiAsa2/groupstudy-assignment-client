@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Register = () => {
 
     const firebaseAuth = useAuth()
-    const { createUser, user } = firebaseAuth
+    const { createUser, signOut } = firebaseAuth
     // console.log(firebaseAuth,createUser,user)
 
     const [passType, setPassType] = useState("password")
@@ -44,6 +44,7 @@ const Register = () => {
             .then(res => {
                 toast.success(`Successfully signed up as ! ${res.user.displayName}`)
                 console.log(res.user)
+                signOut()
             })
             .catch(error => {
                 console.log(error.code)
