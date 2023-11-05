@@ -30,13 +30,10 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, gitHubLoginProvider)
     }
 
-    const signOut=()=>{
-        return signOut(auth)
-    }
-
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             setUser(currentUser)
+            setIsLoading(false)
             console.log("Current user is: ",currentUser)
         })
         return ()=>{
@@ -49,7 +46,6 @@ const AuthProvider = ({children}) => {
         login,
         googleLogin,
         gitHubLogin,
-        signOut,
         isLoading,
         user
     }
