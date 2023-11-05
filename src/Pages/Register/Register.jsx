@@ -3,6 +3,7 @@ import { AiFillEye, AiFillGithub, AiFillGoogleCircle, AiOutlineEye, AiOutlineFil
 import { RiLockPasswordLine } from "react-icons/ri";
 import useAuth from "../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
 
@@ -42,9 +43,13 @@ const Register = () => {
 
         createUser(email, password)
             .then(res => {
-                toast.success(`Successfully signed up as ! ${res.user.displayName}`)
+                toast.success(`Successfully signed up`)
                 console.log(res.user)
-                signOut()
+                updateProfile(res.user,{
+                    displayName: name,
+                    photoURL: image,
+                    email: email
+                })
             })
             .catch(error => {
                 console.log(error.code)
@@ -53,6 +58,7 @@ const Register = () => {
             })
         // console.log(name, email, image, password)
         form.reset()
+        signOut()
 
     }
 
