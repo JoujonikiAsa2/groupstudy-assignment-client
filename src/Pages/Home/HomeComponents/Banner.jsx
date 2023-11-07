@@ -2,10 +2,10 @@ import banner from "../../../assets/photos/banner1.png"
 const Banner = () => {
     return (
         <div className="text-left">
-            <div className="hero min-h-screen">
-                <div className="hero-content flex-col lg:flex-row-reverse justify-between gap-6 lg:gap-36 md:gap-36">
+            <div className="">
+                <div className="flex flex-col lg:flex-row-reverse md:flex-row-reverse justify-between md:justify-between lg:justify-center items-center md:items-center lg:items-center lg:gap-36 gap-4 h-[80vh] pb-6">
                     <div data-aos="fade-down">
-                        <img src={banner} className="max-w-sm rounded-lg" />
+                        <img src={banner} className="max-w-sm rounded-lg  p-4" />
                     </div>
                     <div className='max-w-[420px]' data-aos="fade-up">
                         <h1 className="text-xl md:text-2xl lg:text-4xl font-bold">Meet peoples world wide and  <span className='text-[#2BAFFC]'>learn togher</span></h1>

@@ -5,8 +5,8 @@ const FAQ = () => {
         <div className="mb-12">
             <h1 className="text-2xl font-bold text-[#2BAFFC] text-center py-0" data-aos="zoom-in">FAQ</h1>
             <div className='flex flex-col md:flex-row-reverse lg:flex-row-reverse justify-center items-center'>
-                <Lottie animationData={faq} className='max-w-sm h-auto' data-aos="fade-left"></Lottie>
-                <div className="join join-vertical w-full" data-aos="fade-right">
+                <Lottie animationData={faq} className='max-w-sm h-auto' data-aos="fade-down"></Lottie>
+                <div className="join join-vertical w-full" data-aos="fade-up">
                     <div className="collapse collapse-arrow join-item border border-base-300">
                         <input type="radio" name="my-accordion-4" />
                         <div className="collapse-title text-xl font-medium">
