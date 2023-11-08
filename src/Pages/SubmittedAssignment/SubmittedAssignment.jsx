@@ -11,7 +11,7 @@ const SubmittedAssignment = () => {
     const status = "pending"
 
     useEffect(()=>{
-        axios.get(`http://localhost:5000/submissions/statusCode/${status}`)
+        axios.get(`https://group-study-server-side-sigma.vercel.app/submissions/statusCode/${status}`)
         .then(res=> setPendingAssign(res.data))
         .catch(error =>console.log(error))
     },[pendingAssign])

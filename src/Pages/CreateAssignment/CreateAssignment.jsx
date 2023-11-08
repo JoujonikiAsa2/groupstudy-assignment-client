@@ -28,7 +28,7 @@ const CreateAssignment = () => {
         const assignmnent = { title, description, marks, image, difficulty, dueDate, creatorEmail }
         console.log(assignmnent)
 
-        axios.post("http://localhost:5000/assignments", assignmnent)
+        axios.post("https://group-study-server-side-sigma.vercel.app/assignments", assignmnent)
             .then(res => {
                 console.log(res.data)
                 if (res.data.insertedId

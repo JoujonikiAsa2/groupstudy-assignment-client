@@ -20,7 +20,7 @@ const Assignments = () => {
     const handleClick = (e) => {
         e.preventDefault()
         setLavel(e.target.value)
-        fetch(`http://localhost:5000/assignments/level/${e.target.value}`, {
+        fetch(`https://group-study-server-side-sigma.vercel.app/assignments/level/${e.target.value}`, {
             method: "GET",
             headers: { "content-type": "application/json" },
             body: JSON.stringify()
@@ -32,7 +32,7 @@ const Assignments = () => {
     console.log(level)
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/assignments/${id}`)
+        axios.delete(`https://group-study-server-side-sigma.vercel.app/assignments/${id}`)
             .then((res) => {
                 const remaining = assignments.filter(assign => assign._id != id)
                 setFilteredAssignment(remaining)

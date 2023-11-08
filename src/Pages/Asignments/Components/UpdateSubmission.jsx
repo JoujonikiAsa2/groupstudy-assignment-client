@@ -13,7 +13,7 @@ const UpdateSubmission = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/assignments/${id}`)
+        axios.get(`https://group-study-server-side-sigma.vercel.app/assignments/${id}`)
             .then(res => setSubmittedAssignment(res.data))
             .catch(error => console.log(error))
     }, [])
@@ -27,7 +27,7 @@ const UpdateSubmission = () => {
         const submissionInfo = { id, link, email, submittedAssignment }
         // console.log(title)
 
-        axios.post("http://localhost:5000/submissions", submissionInfo)
+        axios.post("https://group-study-server-side-sigma.vercel.app/submissions", submissionInfo)
             .then(res => console.log(res.data))
             .catch(error => console.log(error))
             console.log(submittedAssignment)

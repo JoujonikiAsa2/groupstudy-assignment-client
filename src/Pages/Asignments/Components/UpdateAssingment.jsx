@@ -18,7 +18,7 @@ const UpdateAssingment = () => {
 
     useEffect(()=>{
 
-        fetch(`http://localhost:5000/assignments/${id}`)
+        fetch(`https://group-study-server-side-sigma.vercel.app/assignments/${id}`)
             .then(res => res.json())
             .then(data => setLoadedAssignment(data));
     }, [id]);
@@ -42,7 +42,7 @@ const UpdateAssingment = () => {
 
         console.log(loadedAssignment._id)
 
-        fetch(`http://localhost:5000/assignments/${loadedAssignment._id}`, {
+        fetch(`https://group-study-server-side-sigma.vercel.app/assignments/${loadedAssignment._id}`, {
             method: 'PATCH',
             headers: { "content-type": "application/json" },
             body: JSON.stringify(updatedAssignment)

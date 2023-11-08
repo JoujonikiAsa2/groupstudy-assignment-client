@@ -23,7 +23,7 @@ const Marking = () => {
         const MarkingInfo = { marks, feedback, status:"done" }
         // console.log(title)
 
-        fetch(`http://localhost:5000/submissions/${assignment._id}`, {
+        fetch(`https://group-study-server-side-sigma.vercel.app/submissions/${assignment._id}`, {
             method: 'PATCH',
             headers: { "content-type": "application/json" },
             body: JSON.stringify(MarkingInfo)

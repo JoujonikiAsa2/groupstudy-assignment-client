@@ -27,7 +27,7 @@ const Routes = createBrowserRouter([
             {
                 path: '/assignments',
                 element: <Assignments></Assignments>,
-                loader: ()=>fetch("http://localhost:5000/assignments")
+                loader: ()=>fetch("https://group-study-server-side-sigma.vercel.app/assignments")
             },
             {
                 path: '/createAssignment',
@@ -36,7 +36,7 @@ const Routes = createBrowserRouter([
             {
                 path: '/myAssignments',
                 element: <PrivateRoutes><MyAssignment></MyAssignment></PrivateRoutes>,
-                loader: ()=> fetch("http://localhost:5000/submissions")
+                loader: ()=> fetch("https://group-study-server-side-sigma.vercel.app/submissions")
             },
             {
                 path: '/submittedAssignments',
@@ -45,17 +45,17 @@ const Routes = createBrowserRouter([
             {
                 path: '/viewDetails/:id',
                 element: <PrivateRoutes><AssignmentDetails></AssignmentDetails></PrivateRoutes>,
-                loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+                loader: ({params})=>fetch(`https://group-study-server-side-sigma.vercel.app/assignments/${params.id}`)
                 
             },
             {
                 path: '/updateAssignment/:id',
                 element: <PrivateRoutes><UpdateAssingment></UpdateAssingment></PrivateRoutes>,
-                loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+                loader: ({params})=>fetch(`https://group-study-server-side-sigma.vercel.app/assignments/${params.id}`)
             },
             {
                 path: '/deleteAssignment/:id',
-                loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+                loader: ({params})=>fetch(`https://group-study-server-side-sigma.vercel.app/assignments/${params.id}`)
             },
             {
                 path: '/submission/:id',
@@ -64,7 +64,7 @@ const Routes = createBrowserRouter([
             {
                 path: '/marking/:id',
                 element: <PrivateRoutes><Marking></Marking></PrivateRoutes>,
-                loader: ({params})=>fetch(`http://localhost:5000/submissions/${params.id}`)
+                loader: ({params})=>fetch(`https://group-study-server-side-sigma.vercel.app/submissions/${params.id}`)
             }
         ]
     } ,
