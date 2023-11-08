@@ -3,15 +3,13 @@ import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
 const UpdateAssingment = () => {
     const [startDate, setStartDate] = useState(new Date())
     const navigate = useNavigate()
-    const assignment = useLoaderData()
-
+    const loadedAssignment = useLoaderData()
+    const [assignment,setAssignment] = useState([]) 
     const id = useParams()
 
     useEffect(()=>{
@@ -69,28 +67,29 @@ const UpdateAssingment = () => {
 
     }
     return (
-        <div className="py-8">
+        <div className="p-4">
             <h2 className="py-8 text-2xl font-bold text-center">Update Assgnment</h2>
-            <form onSubmit={handleUpdateASsignment}>
+            <form onSubmit={handleUpdateASsignment} className='flex flex-col'>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Title</span>
-                    <input type="text" name="title" defaultValue={assignment.title} className="input input-bordered w-96" />
+                    <input type="text" name="title" defaultValue={loadedAssignment.title} className="input input-bordered w-96" />
                 </label>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Description</span>
-                    <input type="text" name="description" defaultValue={assignment.description}  className="input input-bordered w-96" />
+                    <input type="text" name="description" defaultValue={loadedAssignment.description}  className="input input-bordered w-96" />
                 </label>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Marks</span>
-                    <input type="text" name="marks" defaultValue={assignment.marks} className="input input-bordered w-96" />
+                    <input type="text" name="marks" defaultValue={loadedAssignment.marks} className="input input-bordered w-96" />
                 </label>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Image URL</span>
-                    <input type="text" name="photo" defaultValue={assignment.image} className="input input-bordered w-96" />
+                    <input type="text" name="photo" defaultValue={loadedAssignment.image} className="input input-bordered w-96" />
                 </label>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Assigment Difficulty</span>
-                    <select className="input input-bordered w-96" name="difficulty" defaultValue={assignment.difficulty}>
+                    <select className="input input-bordered w-96" name="difficulty" selected={loadedAssignment.difficulty}>
+                        <option value={loadedAssignment.difficulty}>{loadedAssignment.difficulty}</option>
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
@@ -98,7 +97,7 @@ const UpdateAssingment = () => {
                 </label>
                 <label className="flex flex-col gap-3 pb-3">
                     <span>Due Date</span>
-                    <DatePicker selected={new Date(assignment.dueDate)} onChange={(date) => setStartDate(date)}  dateFormat="MM/dd/yyyy"/>
+                    <DatePicker selected={new Date(loadedAssignment.dueDate)} onChange={(date) => setStartDate(date)}  dateFormat="MM/dd/yyyy"/>
                 </label>
                 <input type="submit" name="image" value="Update Assignment" className="text-center input input-bordered w-96 bg-[#55C360] font-bold text-white " />
             </form>

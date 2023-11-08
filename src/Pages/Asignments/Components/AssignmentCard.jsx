@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const AssignmentCard = ({ assignment }) => {
     console.log(assignment)
     return (
@@ -9,8 +11,8 @@ const AssignmentCard = ({ assignment }) => {
                 <p>Difficulty Level: {assignment.difficulty}</p>
             </div>
             <div className="flex flex-col lg:flex-row md:flex-row gap-1 px-2 pb-3">
-                <button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">View Assignment</button>
-                <button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">Update Assignment</button>
+                <Link><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">View Assignment</button></Link>
+                <Link to={`/updateAssignment/${assignment._id}`}><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">Update Assignment</button></Link>
             </div>
         </div>
     );
