@@ -11,6 +11,8 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import UpdateAssingment from "../Pages/Asignments/Components/UpdateAssingment";
 import DeleteAssignment from "../Pages/Asignments/Components/DeleteAssignment";
 import Assignments from "../Pages/Asignments/Assignments";
+import AssignmentDetails from "../Pages/Asignments/Components/AssignmentDetails";
+import Submission from "../Pages/Asignments/Components/Submission";
 
 const Routes = createBrowserRouter([
     {
@@ -37,7 +39,13 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/submittedAssignments',
-                element: <PrivateRoutes><SubmittedAssignment></SubmittedAssignment></PrivateRoutes>
+                element: <PrivateRoutes><SubmittedAssignment></SubmittedAssignment></PrivateRoutes>,
+                loader: ()=> fetch('http://localhost:5000/submissions/joujonikiasaroy@gmail.com')
+            },
+            {
+                path: '/viewDetails/:id',
+                element: <PrivateRoutes><AssignmentDetails></AssignmentDetails></PrivateRoutes>,
+                loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
             },
             {
                 path: '/updateAssignment/:id',
@@ -47,6 +55,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/deleteAssignment',
                 element: <PrivateRoutes><DeleteAssignment></DeleteAssignment></PrivateRoutes>
+            },
+            {
+                path: '/submission/:id',
+                element: <PrivateRoutes><Submission></Submission></PrivateRoutes>
             }
         ]
     } ,

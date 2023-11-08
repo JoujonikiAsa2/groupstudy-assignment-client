@@ -10,8 +10,8 @@ import useAuth from "../../Hooks/useAuth";
 
 const CreateAssignment = () => {
     const firebaseAuth = useAuth()
-    const {user} = firebaseAuth
-    const [startDate, setStartDate] = useState(new Date())
+    const { user } = firebaseAuth
+    const [startDate, setStartDate] = useState()
     const navigate = useNavigate()
 
     const handleCreateASsignment = (e) => {
@@ -25,7 +25,7 @@ const CreateAssignment = () => {
         const dueDate = startDate
         const creatorEmail = user.email
         console.log(title, description, marks, image, difficulty, dueDate)
-        const assignmnent = { title, description, marks, image, difficulty, dueDate,creatorEmail }
+        const assignmnent = { title, description, marks, image, difficulty, dueDate, creatorEmail }
         console.log(assignmnent)
 
         axios.post("http://localhost:5000/assignments", assignmnent)
@@ -44,7 +44,7 @@ const CreateAssignment = () => {
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
                     })
-    
+
                     Toast.fire({
                         icon: 'success',
                         title: 'Assignment added successfully'
@@ -61,36 +61,53 @@ const CreateAssignment = () => {
     return (
         <div className="py-8">
             <h2 className="py-8 text-2xl font-bold text-center">Create Assgnment</h2>
-            <form onSubmit={handleCreateASsignment}>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Title</span>
-                    <input type="text" name="title" placeholder="Give your assignment title here..." className="input input-bordered w-96" />
-                </label>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Description</span>
-                    <input type="text" name="description" placeholder="Give your assignment description here..." className="input input-bordered w-96" />
-                </label>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Marks</span>
-                    <input type="text" name="marks" placeholder="Give your assignment marks here..." className="input input-bordered w-96" />
-                </label>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Image URL</span>
-                    <input type="text" name="photo" placeholder="Give your assignment image URL here..." className="input input-bordered w-96" />
-                </label>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Assigment Difficulty</span>
-                    <select className="input input-bordered w-96" name="difficulty">
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                </label>
-                <label className="flex flex-col gap-3 pb-3">
-                    <span>Due Date</span>
-                    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)}  dateFormat="MM/dd/yyyy"/>
-                </label>
-                <input type="submit" name="image" value="Create Assignment" className="text-center input input-bordered w-96 bg-[#55C360] font-bold text-white " />
+            <form onSubmit={handleCreateASsignment} className="w-[80vw] ">
+                <div className="w-full flex flex-col justify-center items-center">
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3">
+                            <span>Title</span>
+                            <input type="text" name="title" placeholder="Give your assignment title here..." className="input input-bordered  max-w-full" required />
+                        </label>
+                    </div>
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3 pb-3">
+                            <span>Description</span>
+                            <input type="text" name="description" placeholder="Give your assignment description here..." className="input input-bordered max-w-full" required />
+                        </label>
+                    </div>
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3 pb-3">
+                            <span>Marks</span>
+                            <input type="text" name="marks" placeholder="Give your assignment marks here..." className="input input-bordered max-w-full" required />
+                        </label>
+                    </div>
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3 pb-3">
+                            <span>Image URL</span>
+                            <input type="text" name="photo" placeholder="Give your assignment image URL here..." className="input input-bordered max-w-full" required />
+                        </label>
+                    </div>
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3 pb-3">
+                            <span>Assigment Difficulty</span>
+                            <select className="input input-bordered max-w-full" name="difficulty" required>
+                                <option value=""></option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div className="w-full flex flex-col justify-center">
+                        <label className="flex flex-col gap-3 pb-3">
+                            <span>Due Date</span>
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} dateFormat="MM/dd/yyyy" className="input input-bordered max-w-full" required />
+                        </label>
+                    </div>
+                </div>
+                <div className="flex justify-center items-center">
+                    <input type="submit" name="image" value="Create Assignment" className="text-center input input-bordered max-w-full bg-[#55C360] font-bold text-white " />
+                </div>
             </form>
         </div>
     );

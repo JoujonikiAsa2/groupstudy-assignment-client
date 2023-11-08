@@ -11,7 +11,7 @@ const AssignmentCard = ({ assignment }) => {
                 <p>Difficulty Level: {assignment.difficulty}</p>
             </div>
             <div className="flex flex-col lg:flex-row md:flex-row gap-1 px-2 pb-3">
-                <Link><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">View Assignment</button></Link>
+                <Link to={`/viewDetails/${assignment._id}`}><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">View Assignment</button></Link>
                 <Link to={`/updateAssignment/${assignment._id}`}><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">Update Assignment</button></Link>
             </div>
         </div>
