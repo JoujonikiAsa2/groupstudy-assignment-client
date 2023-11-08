@@ -14,7 +14,7 @@ const MyAssignmentCard = ({assignment}) => {
                     <h2 className="text-xl"> <span className="pt-3 text-xl font-bold">Assignment:</span> {assignment.submittedAssignment.title}</h2>
                     <p><span className="text-sx font-bold">Assignment Marks</span>: {assignment.submittedAssignment.marks}</p>
                     <p><span className="text-sx font-bold">Obtain Marks:</span>  {assignment.marks || "Not Given"}</p>
-                    <p className="w-96"><span className="text-sx font-bold">Feedback:</span> {assignment.feedback ||"Not Given "} Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet non magnam rerum repellat sunt quos mollitia vel esse vitae odio!</p>
+                    <p className="w-96"><span className="text-sx font-bold">Feedback:</span> {assignment.feedback ||"Not Given "}</p>
                 </div>
                 <div className="flex flex-col lg:flex-row md:flex-row gap-1 px-2 pb-3">
                     {
