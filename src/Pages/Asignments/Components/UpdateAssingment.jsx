@@ -5,16 +5,25 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from 'sweetalert2';
 import useAuth from '../../../Hooks/useAuth';
-
 const UpdateAssingment = () => {
-
+    const { id } = useParams()
+    console.log(id)
     const firebaseAuth = useAuth()
     const { user } = firebaseAuth
+    const [loadedAssignment,setLoadedAssignment] = useState([])
+    
     const [startDate, setStartDate] = useState(new Date())
     const navigate = useNavigate()
-    const loadedAssignment = useLoaderData()
-    const id = useParams()
     const updaterEmail = user?.email
+
+    useEffect(()=>{
+
+        fetch(`http://localhost:5000/assignments/${id}`)
+            .then(res => res.json())
+            .then(data => setLoadedAssignment(data));
+    }, [id]);
+
+    console.log(loadedAssignment)
 
     const handleUpdateASsignment = (e) => {
         e.preventDefault()
@@ -29,7 +38,7 @@ const UpdateAssingment = () => {
 
         console.log(title, description, marks, image, difficulty, dueDate)
         const updatedAssignment = { title, description, marks, image, difficulty, dueDate, updaterEmail }
-        console.log(updatedAssignment)
+        console.log(updatedAssignment.image)
 
         console.log(loadedAssignment._id)
 
@@ -55,7 +64,7 @@ const UpdateAssingment = () => {
 }
 return (
     <div className="py-8" data-aos="fade-down">
-        <h2 className="py-8 text-2xl font-bold text-center">Create Assgnment</h2>
+        <h2 className="py-8 text-2xl font-bold text-center">Update Assgnment</h2>
         <form onSubmit={handleUpdateASsignment} className="w-[80vw] ">
             <div className="w-full flex flex-col justify-center items-center">
                 <div className="w-full flex flex-col justify-center">
@@ -96,12 +105,12 @@ return (
                 <div className="w-full flex flex-col justify-center">
                     <label className="flex flex-col gap-3 pb-3">
                         <span>Due Date</span>
-                        <DatePicker selected={new Date(loadedAssignment.dueDate)} onChange={(date) => setStartDate(date)} dateFormat="MM/dd/yyyy" className="input input-bordered max-w-full" required />
+                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} dateFormat="MM/dd/yyyy" className="input input-bordered max-w-full" required />
                     </label>
                 </div>
             </div>
             <div className="flex justify-center items-center">
-                <input type="submit" name="image" value="Create Assignment" className="text-center input input-bordered max-w-full bg-[#55C360] font-bold text-white " />
+                <input type="submit" name="image" value="Update Assignment" className="text-center input input-bordered max-w-full bg-[#55C360] font-bold text-white " />
             </div>
         </form>
     </div>

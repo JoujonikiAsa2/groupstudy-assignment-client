@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const Submission = () => {
 
     const { id } = useParams()
+    console.log("id",id)
     const { user } = useAuth()
     const navigate= useNavigate()
     console.log(id, user)
@@ -21,6 +22,8 @@ const Submission = () => {
             .then(res => setSubmittedAssignment(res.data))
             .catch(error => console.log(error))
     }, [])
+
+    console.log(submittedAssignment)
 
     const handleSubmission = (e) => {
         e.preventDefault()
@@ -41,7 +44,7 @@ const Submission = () => {
                             text: "Your assginment link submitted successfully",
                             icon: "success"
                           });
-                          navigate(`/myAssignments/${user.email}`)
+                          navigate("/")
                 }
             })
             .catch(error => console.log(error))

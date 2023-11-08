@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import Swal from "sweetalert2";
-
 const AssignmentDetails = () => {
     const assignment = useLoaderData()
     const [hidden, setHidden] = useState(['hidden', 'block'])
+    const date = new Date(assignment.dueDate).toDateString()
+    // console.log(date)
 
     const handleView = () => {
         setHidden(['block', 'hidden'])
@@ -25,11 +25,12 @@ const AssignmentDetails = () => {
                 <button onClick={handleCancel} className="btn btn-sm  bg-[#2BAFFC] capitalize text-sx">Cancel Full image</button>
             </div>
             <div>
-                <h2>Task: {assignment.title}</h2>
-                <p>{assignment.description}</p>
-                <p>Marks: {assignment.marks}</p>
-                <p>Difficulty Level: {assignment.difficulty}</p>
-                {/* <p>{new Date(assignment.dueDate)}</p> */}
+                <h2><span className="text-lg font-bold">Task:</span> {assignment.title}</h2>
+                <p><span className="text-lg font-bold">Due Date:</span> {date}</p>
+                <p><span className="text-lg font-bold">Description:</span> {assignment.description}</p>
+                <p><span className="text-lg font-bold">Marks:</span> {assignment.marks}</p>
+                <p><span className="text-lg font-bold">Difficulty Level:</span> {assignment.difficulty}</p>
+
             </div>
             <div className="py-3">
                 <Link to={`/submission/${assignment._id}`}><button className="btn btn-sm  bg-[#55C360] capitalize text-sx">Take Assignment</button></Link>

@@ -8,7 +8,7 @@ const MyAssignmentCard = ({assignment}) => {
         <div className="card border-2 border-[#2BAFFC] p-6 my-3" data-aos="zoom-in">
             <div className="flex justify-center items-center gap-3">
                 <div>
-                    <img src="https://i.ibb.co/LhXrKtH/tree-736885-1280-1.jpg" alt="" className="w-60" />
+                    <img src={assignment.submittedAssignment.image} alt="" className="w-48" />
                 </div>
                 <div>
                     <h2 className="text-xl"> <span className="pt-3 text-xl font-bold">Assignment:</span> {assignment.submittedAssignment.title}</h2>

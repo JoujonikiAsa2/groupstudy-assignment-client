@@ -11,6 +11,10 @@ const Assignments = () => {
     console.log(assignments)
     const [filteredAssignment, setFilteredAssignment] = useState(assignments)
     const [level, setLavel] = useState(null)
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [count, setCount] = useState(0)
+    const numberOfPages = Math.ceil(count / itemsPerPage);
 
     const userEmail = user.email
     const handleClick = (e) => {

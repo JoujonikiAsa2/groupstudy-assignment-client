@@ -58,7 +58,7 @@ const AssignmentCard = ({ assignment, handleDelete, user }) => {
                 <p>Marks: {assignment.marks}</p>
                 <p>Difficulty Level: {assignment.difficulty}</p>
             </div>
-            <div className="flex flex-col lg:flex-row md:flex-row gap-1 px-2 pb-3">
+            <div className="flex flex-col lg:flex-row md:flex-row justify-center items-center gap-1 px-2 pb-3">
                 <Link to={`/viewDetails/${assignment._id}`}><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">View Details</button></Link>
                 <Link to={`/updateAssignment/${assignment._id}`}><button className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">Update</button></Link>
                 <button onClick={() => handleLocalDelete(assignment._id)} className="btn btn-sm hover:bg-transparent bg-[#2BAFFC] capitalize text-white font-bold">Delete</button>

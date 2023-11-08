@@ -14,7 +14,7 @@ const SubmittedAssignment = () => {
         axios.get(`http://localhost:5000/submissions/statusCode/${status}`)
         .then(res=> setPendingAssign(res.data))
         .catch(error =>console.log(error))
-    },[])
+    },[pendingAssign])
 
     console.log(pendingAssign)
 

@@ -4,72 +4,75 @@ import { RiArrowLeftCircleFill, RiLockPasswordLine } from 'react-icons/ri'
 import useAuth from '../../Hooks/useAuth';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export const CurrentLoggedUser = createContext()
 const Login = () => {
     const firebaseAuth = useAuth()
-    const { user, login, googleLogin ,gitHubLogin} = firebaseAuth
+    const { user, login, googleLogin, gitHubLogin } = firebaseAuth
     const [passType, setPassType] = useState("password")
-    // const [loggeduser, setLoggeduser] = useState([])
+    const [error, setError] = useState([])
 
     const navigate = useNavigate()
 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(res => {
-            console.log(res.user)
-            if (res.user != null) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+            .then(res => {
+                console.log(res.user)
+                if (res.user != null) {
+   
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Signed in successfully'
-                })
-                navigate('/')
-                // signOut()
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Signed in successfully'
+                    })
+                    navigate('/')
+                    // signOut()
+                }
             }
-        }
-        )
-        .catch(error => console.log(error.message))
+            )
+            .catch(error => setError(error.message))
     }
 
     const handleGitHubLogin = () => {
         gitHubLogin()
-        .then(res => {
-            console.log(res.user)
-            if (res.user != null) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+            .then(res => {
+                console.log(res.user)
 
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Signed in successfully'
-                })
-                navigate('/')
-                // signOut()
+                if (res.user != null) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Signed in successfully'
+                    })
+                    navigate('/')
+                    // signOut()
+                }
             }
-        }
-        )
-        .catch(error => console.log(error.message))
+            )
+            .catch(error => error(error.message))
     }
 
 
@@ -105,7 +108,7 @@ const Login = () => {
                 }
             }
             )
-            .catch(error => console.log(error.message))
+            .catch(error => setError(error.message))
         form.reset()
         console.log(user)
     }
@@ -158,6 +161,9 @@ const Login = () => {
                                             passType == "text" && <div onClick={() => setPassType("password")}><AiOutlineEye></AiOutlineEye></div>
                                         }
                                     </div>
+                                </div>
+                                <div>
+                                    {error ? <small className='text-red-700'>{error}</small> : <p></p>}
                                 </div>
                                 <div>
                                     <input type="submit" value="Login" className='input input-bordered rounded w-full text-[#F4F9FD] bg-[#2BAFFC] hover:bg-transparent hover:border-[#2BAFFC] hover:text-[#010101] cursor-pointer font-bold' />
