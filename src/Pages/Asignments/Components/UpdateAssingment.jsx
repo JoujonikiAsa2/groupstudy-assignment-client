@@ -43,80 +43,69 @@ const UpdateAssingment = () => {
                 console.log(data);
                 if (data.modifiedCount
                     > 0) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Assignment updated successfully'
-                    })
+                    Swal.fire({
+                        text: "The assginment modified successfully",
+                        icon: "success"
+                    });
                     navigate('/assignments')
                 }
+                navigate('/assignments')
             })
 
-    }
-    return (
-        <div className="py-8">
-            <h2 className="py-8 text-2xl font-bold text-center">Create Assgnment</h2>
-            <form onSubmit={handleUpdateASsignment} className="w-[80vw] ">
-                <div className="w-full flex flex-col justify-center items-center">
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3">
-                            <span>Title</span>
-                            <input type="text" name="title" defaultValue={loadedAssignment.title} className="input input-bordered  max-w-full" required />
-                        </label>
-                    </div>
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3 pb-3">
-                            <span>Description</span>
-                            <input type="text" name="description" defaultValue={loadedAssignment.description} className="input input-bordered max-w-full" required />
-                        </label>
-                    </div>
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3 pb-3">
-                            <span>Marks</span>
-                            <input type="text" name="marks" defaultValue={loadedAssignment.marks} className="input input-bordered max-w-full" required />
-                        </label>
-                    </div>
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3 pb-3">
-                            <span>Image URL</span>
-                            <input type="text" name="photo" defaultValue={loadedAssignment.image} className="input input-bordered max-w-full" required />
-                        </label>
-                    </div>
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3 pb-3">
-                            <span>Assigment Difficulty</span>
-                            <select className="input input-bordered max-w-full" name="difficulty" required>
-                                <option value={loadedAssignment.difficulty}>{loadedAssignment.difficulty}</option>
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div className="w-full flex flex-col justify-center">
-                        <label className="flex flex-col gap-3 pb-3">
-                            <span>Due Date</span>
-                            <DatePicker selected={new Date(loadedAssignment.dueDate)} onChange={(date) => setStartDate(date)} dateFormat="MM/dd/yyyy" className="input input-bordered max-w-full" required />
-                        </label>
-                    </div>
+}
+return (
+    <div className="py-8" data-aos="fade-down">
+        <h2 className="py-8 text-2xl font-bold text-center">Create Assgnment</h2>
+        <form onSubmit={handleUpdateASsignment} className="w-[80vw] ">
+            <div className="w-full flex flex-col justify-center items-center">
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3">
+                        <span>Title</span>
+                        <input type="text" name="title" defaultValue={loadedAssignment.title} className="input input-bordered  max-w-full" required />
+                    </label>
                 </div>
-                <div className="flex justify-center items-center">
-                    <input type="submit" name="image" value="Create Assignment" className="text-center input input-bordered max-w-full bg-[#55C360] font-bold text-white " />
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3 pb-3">
+                        <span>Description</span>
+                        <input type="text" name="description" defaultValue={loadedAssignment.description} className="input input-bordered max-w-full" required />
+                    </label>
                 </div>
-            </form>
-        </div>
-    );
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3 pb-3">
+                        <span>Marks</span>
+                        <input type="text" name="marks" defaultValue={loadedAssignment.marks} className="input input-bordered max-w-full" required />
+                    </label>
+                </div>
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3 pb-3">
+                        <span>Image URL</span>
+                        <input type="text" name="photo" defaultValue={loadedAssignment.image} className="input input-bordered max-w-full" required />
+                    </label>
+                </div>
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3 pb-3">
+                        <span>Assigment Difficulty</span>
+                        <select className="input input-bordered max-w-full" name="difficulty" required>
+                            <option value={loadedAssignment.difficulty}>{loadedAssignment.difficulty}</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </label>
+                </div>
+                <div className="w-full flex flex-col justify-center">
+                    <label className="flex flex-col gap-3 pb-3">
+                        <span>Due Date</span>
+                        <DatePicker selected={new Date(loadedAssignment.dueDate)} onChange={(date) => setStartDate(date)} dateFormat="MM/dd/yyyy" className="input input-bordered max-w-full" required />
+                    </label>
+                </div>
+            </div>
+            <div className="flex justify-center items-center">
+                <input type="submit" name="image" value="Create Assignment" className="text-center input input-bordered max-w-full bg-[#55C360] font-bold text-white " />
+            </div>
+        </form>
+    </div>
+);
 };
 
 export default UpdateAssingment;

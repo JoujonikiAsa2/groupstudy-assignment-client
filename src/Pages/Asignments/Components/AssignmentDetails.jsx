@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -13,21 +14,6 @@ const AssignmentDetails = () => {
         setHidden(['hidden', 'block'])
     }
 
-
-    const handleDelete = () => {
-        const { value: text } = Swal.fire({
-            input: "textarea",
-            inputLabel: "Message",
-            inputPlaceholder: "Type your message here...",
-            inputAttributes: {
-                "aria-label": "Type your message here"
-            },
-            showCancelButton: true
-        });
-        if (text) {
-            Swal.fire(text);
-        }
-    }
     return (
         <div>
             <div className={`${hidden[1]} flex flex-col justify-center items-center gap-2 py-4`} >
@@ -47,7 +33,6 @@ const AssignmentDetails = () => {
             </div>
             <div className="py-3">
                 <Link to={`/submission/${assignment._id}`}><button className="btn btn-sm  bg-[#55C360] capitalize text-sx">Take Assignment</button></Link>
-                <button className="btn btn-sm  bg-[#2BAFFC] capitalize text-sx" onClick={handleDelete}>Delete Assignment</button>
             </div>
         </div>
     );

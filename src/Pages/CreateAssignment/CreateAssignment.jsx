@@ -33,33 +33,22 @@ const CreateAssignment = () => {
                 console.log(res.data)
                 if (res.data.insertedId
                     != null) {
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Assignment added successfully'
-                    })
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Your assginment added successfully",
+                            icon: "success"
+                          });
                     navigate('/assignments')
                 }
             })
             .catch(error => {
                 console.log(error)
-                toast.success("Assignment added successfully")
+                toast.success(error)
             })
 
     }
     return (
-        <div className="py-8">
+        <div className="py-8" data-aos="fade-down">
             <h2 className="py-8 text-2xl font-bold text-center">Create Assgnment</h2>
             <form onSubmit={handleCreateASsignment} className="w-[80vw] ">
                 <div className="w-full flex flex-col justify-center items-center">

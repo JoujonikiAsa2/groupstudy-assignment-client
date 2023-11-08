@@ -8,6 +8,7 @@ import Loading from "../Loading/Loading";
 const Navbar = () => {
 
     const { user, isLoading } = useContext(AuthContext)
+    const status = "pending"
 
     if (isLoading) {
         return <Loading></Loading>
@@ -82,7 +83,7 @@ const Navbar = () => {
                                                     fontWeight: isActive ? "bold" : "medium",
                                                 }
                                             }}>Create Assignment</NavLink></li>
-                                            <li><NavLink to="/myAssignments" className="bg-transparent" style={({ isActive }) => {
+                                            <li><NavLink to="/myAssignments" onClick={()=>console.log("i am clicked")} className="bg-transparent" style={({ isActive }) => {
                                                 return {
                                                     backgroundColor: isActive ? "#55c360" : "",
                                                     color: isActive ? "white" : "#010101",
@@ -133,10 +134,10 @@ const Navbar = () => {
                             <div className="lg:hidden md:hidden flex flex-col">
                                 <div className="avatar">
                                     <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img src={user.photoURL} />
+                                        <img src={user?.photoURL} />
                                     </div>
                                 </div>
-                                <h4>{user.displayName}</h4>
+                                <h4>{user?.displayName}</h4>
                             </div>
                         </li>
                         {links}
@@ -162,7 +163,8 @@ const Navbar = () => {
                                             fontWeight: isActive ? "bold" : "medium",
                                         }
                                     }}>My Assignment</NavLink></li>
-                                    <li><NavLink to="/submittedAssignments" className="bg-transparent" style={({ isActive }) => {
+                                    <li><NavLink to="/submittedAssignments"
+                                    className="bg-transparent" style={({ isActive }) => {
                                         return {
                                             backgroundColor: isActive ? "#55c360" : "",
                                             color: isActive ? "white" : "#010101",

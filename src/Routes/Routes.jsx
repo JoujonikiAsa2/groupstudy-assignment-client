@@ -13,6 +13,7 @@ import DeleteAssignment from "../Pages/Asignments/Components/DeleteAssignment";
 import Assignments from "../Pages/Asignments/Assignments";
 import AssignmentDetails from "../Pages/Asignments/Components/AssignmentDetails";
 import Submission from "../Pages/Asignments/Components/Submission";
+import Marking from "../Pages/Asignments/Components/Marking";
 
 const Routes = createBrowserRouter([
     {
@@ -34,18 +35,19 @@ const Routes = createBrowserRouter([
                 element: <PrivateRoutes><CreateAssignment></CreateAssignment></PrivateRoutes>
             },
             {
-                path: '/myAssignments',
-                element: <PrivateRoutes><MyAssignment></MyAssignment></PrivateRoutes>
+                path: '/myAssignments/',
+                element: <PrivateRoutes><MyAssignment></MyAssignment></PrivateRoutes>,
+                loader: ()=> fetch("http://localhost:5000/submissions/")
             },
             {
                 path: '/submittedAssignments',
-                element: <PrivateRoutes><SubmittedAssignment></SubmittedAssignment></PrivateRoutes>,
-                loader: ()=> fetch('http://localhost:5000/submissions/joujonikiasaroy@gmail.com')
+                element: <PrivateRoutes><SubmittedAssignment></SubmittedAssignment></PrivateRoutes>
             },
             {
                 path: '/viewDetails/:id',
                 element: <PrivateRoutes><AssignmentDetails></AssignmentDetails></PrivateRoutes>,
                 loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+                
             },
             {
                 path: '/updateAssignment/:id',
@@ -53,12 +55,18 @@ const Routes = createBrowserRouter([
                 loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
             },
             {
-                path: '/deleteAssignment',
-                element: <PrivateRoutes><DeleteAssignment></DeleteAssignment></PrivateRoutes>
+                path: '/deleteAssignment/:id',
+                element: <PrivateRoutes><DeleteAssignment></DeleteAssignment></PrivateRoutes>,
+                loader: ({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
             },
             {
                 path: '/submission/:id',
                 element: <PrivateRoutes><Submission></Submission></PrivateRoutes>
+            },
+            {
+                path: '/marking/:id',
+                element: <PrivateRoutes><Marking></Marking></PrivateRoutes>,
+                loader: ({params})=>fetch(`http://localhost:5000/submissions/${params.id}`)
             }
         ]
     } ,

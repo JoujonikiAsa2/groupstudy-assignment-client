@@ -1,13 +1,18 @@
 import { useLoaderData } from "react-router-dom";
 import AssignmentCard from '../Asignments/Components/AssignmentCard'
 import { useEffect, useState } from "react";
+import axios from "axios";
+import useAuth from "../../Hooks/useAuth";
 
 const Assignments = () => {
+    const { user } = useAuth()
+
     const assignments = useLoaderData()
     console.log(assignments)
     const [filteredAssignment, setFilteredAssignment] = useState(assignments)
     const [level, setLavel] = useState(null)
 
+    const userEmail = user.email
     const handleClick = (e) => {
         e.preventDefault()
         setLavel(e.target.value)
@@ -18,11 +23,18 @@ const Assignments = () => {
         })
             .then(res => res.json())
             .then(data => setFilteredAssignment(data))
-    
+
     }
     console.log(level)
 
-
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:5000/assignments/${id}`)
+            .then((res) => {
+                const remaining = assignments.filter(assign => assign._id != id)
+                setFilteredAssignment(remaining)
+        })
+            .then(error => console.log(error))
+    }
 
     return (
         <div>
@@ -42,7 +54,7 @@ const Assignments = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 my-8">
                 {
-                    filteredAssignment.map(assignment => <AssignmentCard key={assignment._id} assignment={assignment}></AssignmentCard>)
+                    filteredAssignment.map(assignment => <AssignmentCard key={assignment._id} user={user} assignment={assignment} handleDelete={handleDelete}></AssignmentCard>)
                 }
             </div>
         </div>

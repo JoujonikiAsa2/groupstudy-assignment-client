@@ -1,19 +1,15 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
-const Submission = () => {
+const UpdateSubmission = () => {
 
     const { id } = useParams()
     const { user } = useAuth()
-    const navigate= useNavigate()
     console.log(id, user)
     const [submittedAssignment, setSubmittedAssignment] = useState(null)
     const email = user.email
-    const examneeName = user.displayName
-    const status = "pending"
 
 
     useEffect(() => {
@@ -22,34 +18,23 @@ const Submission = () => {
             .catch(error => console.log(error))
     }, [])
 
-    const handleSubmission = (e) => {
+    const handleUpdateSubmission = (e) => {
         e.preventDefault()
         const form = e.target
         const link = form.link.value
-        const text = form.text.value
-        console.log(link,text)
+        console.log(link)
 
-        const submissionInfo = { id, link,text, email,examneeName,status, submittedAssignment }
+        const submissionInfo = { id, link, email, submittedAssignment }
         // console.log(title)
 
         axios.post("http://localhost:5000/submissions", submissionInfo)
-            .then(res => {
-                console.log(res.data)
-                if (res.data.insertedId) {
-                        Swal.fire({
-                            title: "Sunmitted Assignment",
-                            text: "Your assginment link submitted successfully",
-                            icon: "success"
-                          });
-                          navigate(`/myAssignments/${user.email}`)
-                }
-            })
+            .then(res => console.log(res.data))
             .catch(error => console.log(error))
             console.log(submittedAssignment)
     }
 
     return (
-        <div className="py-8">
+        <div className="py-8" data-aos="fade-down">
             <h2 className="py-8 text-2xl font-bold text-center">Assgnment Submission</h2>
             <form className="w-[80vw] " onSubmit={handleSubmission}>
                 <div className="w-full flex flex-col justify-center items-center">
@@ -57,7 +42,6 @@ const Submission = () => {
                         <label className="flex flex-col gap-3">
                             <span>Sumbission Link</span>
                             <input type="text" name="link" placeholder="Enter your assignment pdf link here" className="input input-bordered  max-w-full" required />
-                            <textarea type="text" name="text" placeholder="Enter quick text here" className="input input-bordered  max-w-full" required />
                             <input type="submit" value="submit" className="input input-bordered  max-w-full bg-[#55C360]" />
                         </label>
                     </div>
@@ -67,4 +51,4 @@ const Submission = () => {
     );
 };
 
-export default Submission;
+export default UpdateSubmission;
