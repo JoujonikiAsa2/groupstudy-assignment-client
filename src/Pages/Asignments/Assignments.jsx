@@ -9,9 +9,6 @@ const Assignments = () => {
 
     const [filteredAssignment, setFilteredAssignment] = useState([])
     const [level, setLavel] = useState(null)
-    // const [itemsPerPage, setItemsPerPage] = useState(12);
-    // const [count, setCount] = useState(0)
-    // const numberOfPages = Math.ceil(count / itemsPerPage);
     const { count } = useLoaderData()
     const [itemsPerPage, setItemsPerPage] = useState(12);
     const [currentPage, setCurrentPage] = useState(0);
@@ -44,7 +41,7 @@ const Assignments = () => {
     const handleDelete = (id) => {
         axios.delete(`https://group-study-server-side-sigma.vercel.app/assignments/${id}`)
             .then((res) => {
-                const remaining = assignments.filter(assign => assign._id != id)
+                const remaining = filteredAssignment.filter(assign => assign._id != id)
                 setFilteredAssignment(remaining)
             })
             .then(error => console.log(error))
