@@ -21,9 +21,9 @@ const Submission = () => {
         axios.get(`https://group-study-server-side-sigma.vercel.app/assignments/${id}`)
             .then(res => setSubmittedAssignment(res.data))
             .catch(error => console.log(error))
-    }, [])
+    }, [submittedAssignment])
 
-    console.log(submittedAssignment)
+    console.log("my submission", submittedAssignment)
 
     const handleSubmission = (e) => {
         e.preventDefault()
