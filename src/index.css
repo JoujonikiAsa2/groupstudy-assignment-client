@@ -7,6 +7,23 @@
   font-family: 'Lora', serif;
 }
 
+.pagination{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  margin:0.5rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #F4F9FD;
+  border-radius: 10px;
+}
+.pagination .selected {
+  background-color: #2BAFFC;
+}
+
 /* 
 #010101
 #F4F9FD

@@ -1,21 +1,31 @@
 import { useLoaderData } from "react-router-dom";
 import AssignmentCard from '../Asignments/Components/AssignmentCard'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import Loading from "../../SharedComponents/Loading/Loading";
 
 const Assignments = () => {
 
-    const assignments = useLoaderData()
-    console.log(assignments)
-    const [filteredAssignment, setFilteredAssignment] = useState(assignments)
+    const [filteredAssignment, setFilteredAssignment] = useState([])
     const [level, setLavel] = useState(null)
-    const [currentPage, setCurrentPage] = useState(0);
+    // const [itemsPerPage, setItemsPerPage] = useState(12);
+    // const [count, setCount] = useState(0)
+    // const numberOfPages = Math.ceil(count / itemsPerPage);
+    const { count } = useLoaderData()
     const [itemsPerPage, setItemsPerPage] = useState(12);
-    const [count, setCount] = useState(0)
-    const numberOfPages = Math.ceil(count / itemsPerPage);
-    const {isLoading} = useAuth()
+    const [currentPage, setCurrentPage] = useState(0);
+    const { isLoading } = useAuth()
+
+    const numberOfPages = Math.ceil(count / itemsPerPage)
+
+    const pages = [...Array(numberOfPages).keys()]
+
+    useEffect(() => {
+        fetch(`https://group-study-server-side-sigma.vercel.app/assignments?page=${currentPage}&size=${itemsPerPage}`)
+            .then(res => res.json())
+            .then(data => setFilteredAssignment(data))
+    }, [currentPage,itemsPerPage])
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -36,11 +46,28 @@ const Assignments = () => {
             .then((res) => {
                 const remaining = assignments.filter(assign => assign._id != id)
                 setFilteredAssignment(remaining)
-        })
+            })
             .then(error => console.log(error))
     }
 
-    if(isLoading){
+    const handleItemsPerPage = (e) => {
+        console.log(e.target.value)
+        const intPage = parseInt(e.target.value)
+        setItemsPerPage(intPage)
+    }
+
+    const handlePrev = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1)
+        }
+    }
+    const handleNext = () => {
+        if (currentPage < pages.length - 1) {
+            setCurrentPage(currentPage + 1)
+        }
+    }
+
+    if (isLoading) {
         return <Loading></Loading>
     }
 
@@ -64,6 +91,19 @@ const Assignments = () => {
                 {
                     filteredAssignment.map(assignment => <AssignmentCard key={assignment._id} assignment={assignment} handleDelete={handleDelete}></AssignmentCard>)
                 }
+            </div>
+            <div className="pagination">
+                <div><button className="btn" onClick={handlePrev}>Prev</button></div>
+                {
+                    pages.map(page => <button className={currentPage===page && "selected"} key={page} onClick={()=>setCurrentPage(page)}>{page}</button>)
+                }
+                <div><button className="btn" onClick={handleNext}>Next</button></div>
+                <select name="" id="" className="input input-bordered" onChange={handleItemsPerPage}>
+                    <option value="">12</option>
+                    <option value="6">6</option>
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                </select>
             </div>
         </div>
     );

@@ -27,7 +27,7 @@ const Routes = createBrowserRouter([
             {
                 path: '/assignments',
                 element: <Assignments></Assignments>,
-                loader: ()=>fetch("https://group-study-server-side-sigma.vercel.app/assignments")
+                loader: ()=>fetch("https://group-study-server-side-sigma.vercel.app/totalAssignemnt")
             },
             {
                 path: '/createAssignment',
