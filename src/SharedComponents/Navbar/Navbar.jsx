@@ -4,6 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import auth from "../../../Firebase/firebase.config";
 import { signOut } from "firebase/auth";
 import Loading from "../Loading/Loading";
+import axios from "axios";
 
 const Navbar = () => {
 
@@ -17,7 +18,12 @@ const Navbar = () => {
     console.log(user)
     const handleLogOut = () => {
         signOut(auth)
-            .then(() => { console.log("Successfull") })
+            .then(() => {
+                console.log("Successfull")
+                const currentUser = { email: user.email }
+                axios.post('https://group-study-server-side-sigma.vercel.app/logout', currentUser, { withCredentials: true })
+                    .then(res => console.log(res.data))
+            })
             .catch((error) => { console.log(error) })
     }
 
@@ -68,7 +74,7 @@ const Navbar = () => {
                         </div>
 
                         <div className="hidden lg:flex justify-between py-3">
-                        <div></div>
+                            <div></div>
                             <ul className="menu menu-horizontal">
                                 {links}
                                 {
@@ -83,7 +89,7 @@ const Navbar = () => {
                                                     fontWeight: isActive ? "bold" : "medium",
                                                 }
                                             }}>Create Assignment</NavLink></li>
-                                            <li><NavLink to="/myAssignments" onClick={()=>console.log("i am clicked")} className="bg-transparent" style={({ isActive }) => {
+                                            <li><NavLink to="/myAssignments" onClick={() => console.log("i am clicked")} className="bg-transparent" style={({ isActive }) => {
                                                 return {
                                                     backgroundColor: isActive ? "#55c360" : "",
                                                     color: isActive ? "white" : "#010101",
@@ -164,14 +170,14 @@ const Navbar = () => {
                                         }
                                     }}>My Assignment</NavLink></li>
                                     <li><NavLink to="/submittedAssignments"
-                                    className="bg-transparent" style={({ isActive }) => {
-                                        return {
-                                            backgroundColor: isActive ? "#55c360" : "",
-                                            color: isActive ? "white" : "#010101",
-                                            fontSize: '1rem',
-                                            fontWeight: isActive ? "bold" : "medium",
-                                        }
-                                    }}>Submitted Assignments</NavLink></li>
+                                        className="bg-transparent" style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "#55c360" : "",
+                                                color: isActive ? "white" : "#010101",
+                                                fontSize: '1rem',
+                                                fontWeight: isActive ? "bold" : "medium",
+                                            }
+                                        }}>Submitted Assignments</NavLink></li>
                                     <li><NavLink to="/" className="bg-transparent" style={({ isActive }) => {
                                         return {
                                             backgroundColor: "transparent",

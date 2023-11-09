@@ -34,7 +34,7 @@ const Marking = () => {
                 if (data.modifiedCount
                     > 0) {
                     Swal.fire({
-                        text: "The assginment modified successfully",
+                        text: "Grading assignment successfully",
                         icon: "success"
                     });
                     navigate('/assignments')

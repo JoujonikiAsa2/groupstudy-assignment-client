@@ -2,6 +2,8 @@ import { useLoaderData } from "react-router-dom";
 import AssignmentCard from '../Asignments/Components/AssignmentCard'
 import { useState } from "react";
 import axios from "axios";
+import useAuth from "../../Hooks/useAuth";
+import Loading from "../../SharedComponents/Loading/Loading";
 
 const Assignments = () => {
 
@@ -10,9 +12,10 @@ const Assignments = () => {
     const [filteredAssignment, setFilteredAssignment] = useState(assignments)
     const [level, setLavel] = useState(null)
     const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(12);
     const [count, setCount] = useState(0)
     const numberOfPages = Math.ceil(count / itemsPerPage);
+    const {isLoading} = useAuth()
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -35,6 +38,10 @@ const Assignments = () => {
                 setFilteredAssignment(remaining)
         })
             .then(error => console.log(error))
+    }
+
+    if(isLoading){
+        return <Loading></Loading>
     }
 
     return (

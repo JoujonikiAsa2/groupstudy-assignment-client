@@ -20,8 +20,12 @@ const Login = () => {
         googleLogin()
             .then(res => {
                 console.log(res.user)
+                const userEmail = res.user.email
+                const loggedUser = { email: userEmail }
+                console.log(loggedUser)
+                axios.post('https://group-study-server-side-sigma.vercel.app/jwt', loggedUser, { withCredentials: true })
+                    .then(data => console.log(data.data))
                 if (res.user != null) {
-   
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -50,7 +54,11 @@ const Login = () => {
         gitHubLogin()
             .then(res => {
                 console.log(res.user)
-
+                const userEmail = res.user.email
+                const loggedUser = { email: userEmail }
+                console.log(loggedUser)
+                axios.post('https://group-study-server-side-sigma.vercel.app/jwt', loggedUser, { withCredentials: true })
+                    .then(data => console.log(data.data))
                 if (res.user != null) {
                     const Toast = Swal.mixin({
                         toast: true,

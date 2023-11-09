@@ -9,7 +9,7 @@ const MyAssignment = () => {
     const {user} = useAuth()
     const [myAssignments,setMyAssignment] = useState([])
     useEffect(()=>{
-        axios.get(`https://group-study-server-side-sigma.vercel.app/submissions/user/${user.email}`)
+        axios.get(`https://group-study-server-side-sigma.vercel.app/submissions/user/${user.email}`, {withCredentials: true})
         .then(res=> setMyAssignment(res.data))
         .catch(error =>console.log(error))
     },[])

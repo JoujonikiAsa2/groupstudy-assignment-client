@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import auth from "../../Firebase/firebase.config";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { redirect } from "react-router-dom";
+import axios from "axios";
 
 export const AuthContext = createContext()
 const AuthProvider = ({children}) => {
@@ -15,7 +16,13 @@ const AuthProvider = ({children}) => {
     }
 
     const login=(email, password)=>{
+        const userEmail = email
+        const loggedUser = { email: userEmail }
         setIsLoading(true)
+        console.log(loggedUser)
+        axios.post('https://group-study-server-side-sigma.vercel.app/jwt', loggedUser, { withCredentials: true })
+            .then(data => console.log(data.data))
+        
         return signInWithEmailAndPassword(auth, email,password)
     }
 
