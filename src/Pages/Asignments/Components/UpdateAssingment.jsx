@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate, useParams } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,6 +15,7 @@ const UpdateAssingment = () => {
     const [startDate, setStartDate] = useState(new Date())
     const navigate = useNavigate()
     const updaterEmail = user?.email
+    const location = useLocation()
 
     useEffect(()=>{
 
@@ -56,9 +57,8 @@ const UpdateAssingment = () => {
                         text: "The assginment modified successfully",
                         icon: "success"
                     });
-                    navigate('/assignments')
+                    navigate(location.state || "/")
                 }
-                navigate('/assignments')
             })
 
 }

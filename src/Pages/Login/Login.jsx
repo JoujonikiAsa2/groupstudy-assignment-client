@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 import { AiFillEye, AiFillGithub, AiFillGoogleCircle, AiOutlineEye, AiOutlineMail } from 'react-icons/ai'
 import { RiArrowLeftCircleFill, RiLockPasswordLine } from 'react-icons/ri'
 import useAuth from '../../Hooks/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ const Login = () => {
     const { user, login, googleLogin, gitHubLogin } = firebaseAuth
     const [passType, setPassType] = useState("password")
     const [error, setError] = useState([])
+    const location = useLocation()
 
     const navigate = useNavigate()
 
@@ -37,7 +38,7 @@ const Login = () => {
                         icon: 'success',
                         title: 'Signed in successfully'
                     })
-                    navigate('/')
+                    navigate(location.state || '/')
                     // signOut()
                 }
             }
@@ -67,7 +68,7 @@ const Login = () => {
                         icon: 'success',
                         title: 'Signed in successfully'
                     })
-                    navigate('/')
+                    navigate(location.state || "/")
                     // signOut()
                 }
             }
@@ -103,7 +104,7 @@ const Login = () => {
                         icon: 'success',
                         title: 'Signed in successfully'
                     })
-                    navigate('/')
+                    navigate(location.state || '/')
                     // signOut()
                 }
             }
