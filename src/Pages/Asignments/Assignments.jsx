@@ -1,11 +1,9 @@
 import { useLoaderData } from "react-router-dom";
 import AssignmentCard from '../Asignments/Components/AssignmentCard'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import useAuth from "../../Hooks/useAuth";
 
 const Assignments = () => {
-    const { user } = useAuth()
 
     const assignments = useLoaderData()
     console.log(assignments)
@@ -16,7 +14,6 @@ const Assignments = () => {
     const [count, setCount] = useState(0)
     const numberOfPages = Math.ceil(count / itemsPerPage);
 
-    const userEmail = user.email
     const handleClick = (e) => {
         e.preventDefault()
         setLavel(e.target.value)
@@ -58,7 +55,7 @@ const Assignments = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 my-8">
                 {
-                    filteredAssignment.map(assignment => <AssignmentCard key={assignment._id} user={user} assignment={assignment} handleDelete={handleDelete}></AssignmentCard>)
+                    filteredAssignment.map(assignment => <AssignmentCard key={assignment._id} assignment={assignment} handleDelete={handleDelete}></AssignmentCard>)
                 }
             </div>
         </div>
