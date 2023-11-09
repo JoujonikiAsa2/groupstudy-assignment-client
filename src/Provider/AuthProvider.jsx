@@ -39,13 +39,30 @@ const AuthProvider = ({children}) => {
 
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(currentUser)
             setIsLoading(false)
             console.log("Current user is: ",currentUser)
+            if (currentUser) {
+                axios.post('https://group-study-server-side-sigma.vercel.app/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log('token response', res.data);
+                    })
+            }
+            else {
+                axios.post('https://group-study-server-side-sigma.vercel.app/logout', loggedUser, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            }
         })
         return ()=>{
             return unsubscribe()
         }
+
     })
 
     const value = {
