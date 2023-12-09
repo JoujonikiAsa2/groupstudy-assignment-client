@@ -15,6 +15,6 @@ Server Side: <a href="https://github.com/Porgramming-Hero-web-course/b8a11-serve
 
 ## Technologies used
 
-**Frontend:** React.js, HTML5, CSS3
-**Backend:** Node.js, Express.js
-**Database:** MongoDB
+- **Frontend:** React.js, HTML5, CSS3
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
