@@ -2,10 +2,9 @@
 
 **Live link: Study Together**
 
-**Repository Link:**
+** Server Side Repository Link:**
 
-Client Side: Click Here
-Server Side: Click Here
+Server Side: <a href="https://github.com/Porgramming-Hero-web-course/b8a11-server-side-JoujonikiAsa2">Click Here</a>
 
 #### Top Features of This Project:
 Create assignment: It helps user to create assignment.
